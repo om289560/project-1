@@ -1,1 +1,14 @@
+body {
+    background-color: white;
+    font-family: 'Days One', sans-serif;
+}
+
+#song-search {
+    border-color: black;
+}
+
+.search {
+    box-sizing: border-box;
+    margin: 20px;
+}
 
