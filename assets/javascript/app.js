@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+    $('.carousel').carousel();
     $(".waves-effect").on("click", function () {
         var songName = $("#song-search").val().trim();
         youtubeQuery(songName);
