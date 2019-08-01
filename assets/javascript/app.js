@@ -13,7 +13,7 @@ $(document).ready(function () {
         var youTubeURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y";
  
         $.ajax({
-            url: "https://cors-anywhere.herokuapp.com/"+youTubeURL
+            url: youTubeURL
  
         }).then( function (response) {
             console.log(response);
@@ -32,8 +32,9 @@ $(document).ready(function () {
             url: geniusURL,
             method: "GET",
         }).then(function (response) {
-            var lyricsURL = response.response.hits[0];
+            var lyricsURL = response.response.hits[0].result.url;
             console.log(response)
+            console.log(lyricsURL)
             $.ajax({
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET",
