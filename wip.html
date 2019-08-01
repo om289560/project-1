@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/javascript/gradient.js"></script>
 </head>
+
 <body>
+    <div id="gradient">
     <div class="center-align">
         <h2>Lyrical Connection</h2>
         <h3>The Place to Watch, Sing and Enjoy</h3>
@@ -24,23 +28,27 @@
                 <label for="song">Search for a song</label>
             </div>
             <div class="center-align">
-            <a class="waves-effect waves-light btn">button</a>
+                <a class="waves-effect waves-light btn">button</a>
             </div>
         </div>
     </div>
-    <br> 
     <br>
-    <br>   
+    <br>
+    <br>
     <div class="row">
         <div class="container">
             <div class="row">
-                <div class="col-7" id="youtube-content">
+                <div class="col l6" id="youtube-content">
                     <div class="video-container">
-                        <iframe width="853" height="480" src="https://www.youtube.com/embed/LDZX4ooRsWs?autoplay=1&origin=http:LDZX4ooRsWs?version=3" frameborder="0"
-                            allowfullscreen></iframe>
+                        <iframe width="853" height="480"
+                            src="https://www.youtube.com/embed/LDZX4ooRsWs?autoplay=1&origin=http:LDZX4ooRsWs?version=3"
+                            frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
-                <div class="col-5" id="lyrics-content">
+                <div class="col l6" id="lyrics-content">
+                    <div class="lyrics-container">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,17 +66,19 @@
             </div>
         </div>
     </div>
+    </div>
+    <script src="https://speckyboy.com/css-background-effects/"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <!-- <script src="assets/javascript/gradient.js"></script> -->
     <script>
-       
-//   // Or with jQuery
-   $(document).ready(function(){
-     $('.carousel').carousel();
-   });
+
+        //   // Or with jQuery
+        $(document).ready(function () {
+            $('.carousel').carousel();
+        });
     </script>
 </body>
+
 </html>
 Collapse
-
-
-
