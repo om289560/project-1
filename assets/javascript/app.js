@@ -4,15 +4,17 @@ $(document).ready(function () {
         var songName = $("#song-search").val().trim();
         youtubeQuery(songName);
         lyricsQuery(songName);
+        // tasteQuery(songName);//work in progress
         console.log(songName)
+
     });
-    
+
     function youtubeQuery(songName) {
         var youTubeURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y";
-
+ 
         $.ajax({
-            url: youTubeURL
-            
+            url: "https://cors-anywhere.herokuapp.com/"+youTubeURL
+ 
         }).then( function (response) {
             console.log(response);
             var videoID = response.items[0].id.videoId
@@ -20,30 +22,32 @@ $(document).ready(function () {
         });
     }
 
-    function lyricsQuery(songName){
+    function lyricsQuery(songName) {
         // get object of "song" from genius
         // find url and put in lyricsURL var
-        var geniusURL = "https://api.genius.com/search?q=" + songName;
-
+        var accessToken = "aB5kqaAZECyzU--9LkDp_QGCygvr42-91fCx7GBJGezunSnjw-bas1K5yeHlhK0H";
+        var geniusURL = "https://api.genius.com/search?q=Humble&access_token="+accessToken;
+ 
         $.ajax({
             url: geniusURL,
             method: "GET",
-            Authorization: "Bearer rVizdCDy5l-5zaheg4xZSWhYGCGGLdjCPn1465cveWXMPXyGBhlwUiFq40jx4mSO"
-        }).then(function(response){
-            // var lyricsURL = response.item[0].url;
+        }).then(function (response) {
+            var lyricsURL = response.response.hits[0];
             console.log(response)
-            // $.ajax({
-            //     url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
-            //     method: "GET",
-            // }).then(function(response) {
-            //     var yo = $(response).find(".lyrics").text();
-            //     console.log(yo);
-            //     console.log(response)
-            //     $("#lyrics-content").append(yo);
-            // });
+            $.ajax({
+                url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
+                method: "GET",
+            }).then(function(response) {
+                var yo = $(response).find(".lyrics").text();
+                console.log(yo);
+                console.log(response)
+                $("#lyrics-content").append(yo);
+            });
         });
     }
 
+
+   
 
 
 });
