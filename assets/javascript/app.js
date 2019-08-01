@@ -26,7 +26,7 @@ $(document).ready(function () {
         // get object of "song" from genius
         // find url and put in lyricsURL var
         var accessToken = "aB5kqaAZECyzU--9LkDp_QGCygvr42-91fCx7GBJGezunSnjw-bas1K5yeHlhK0H";
-        var geniusURL = "https://api.genius.com/search?q=Humble&access_token="+accessToken;
+        var geniusURL = "https://api.genius.com/search?q="+songName+"&access_token="+accessToken;
  
         $.ajax({
             url: geniusURL,
