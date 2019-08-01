@@ -14,7 +14,7 @@ $(document).ready(function () {
         var youTubeURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y";
  
         $.ajax({
-            url: youTubeURL
+            url:"https://cors-anywhere.herokuapp.com/" + youTubeURL
  
         }).then( function (response) {
             console.log(response);
@@ -35,19 +35,40 @@ $(document).ready(function () {
         }).then(function (response) {
             $("#lyrics-content").empty();
             var lyricsURL = response.response.hits[0].result.url;
+            var artist = response.response.hits[0].result.primary_artist.name;
+            console.log(artist)
             console.log(response)
-            console.log(lyricsURL)
+            tasteQuery(artist)
+            // console.log(lyricsURL)
             $.ajax({
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET",
             }).then(function(response) {
                 var songLyrics = $(response).find(".lyrics").text();
-                console.log(songLyrics);
-                console.log(response)
+                // console.log(songLyrics);
+                // console.log(response)
                 
                 $("#lyrics-content").text(songLyrics);
             });
+
         });
+                function tasteQuery(artist) {
+                    var tasteDiveURL = "https://cors-anywhere.herokuapp.com/" + "https://tastedive.com/api/similar?q=" + artist + "&type=band&limit=5&k=341252-project1-GORKXH3A";
+                    // + artistName +
+             
+                    $.ajax({
+                        url: tasteDiveURL,
+                        method: "GET",
+                    }).then(function(response) {
+                            // console.log(response);
+                            // console.log( response.Similar.Results[0].Name)
+                            var artistNamesArray = response.Similar.Results.map(function(artist){
+                                return artist.Name
+                            })
+                            console.log(artistNamesArray);
+                            $(".related-content")
+                        });
+                }
     }
 
 
