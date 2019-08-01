@@ -13,7 +13,7 @@ $(document).ready(function () {
         var youTubeURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y";
  
         $.ajax({
-            url: "https://cors-anywhere.herokuapp.com/"+youTubeURL
+            url: youTubeURL
  
         }).then( function (response) {
             console.log(response);
@@ -26,14 +26,15 @@ $(document).ready(function () {
         // get object of "song" from genius
         // find url and put in lyricsURL var
         var accessToken = "aB5kqaAZECyzU--9LkDp_QGCygvr42-91fCx7GBJGezunSnjw-bas1K5yeHlhK0H";
-        var geniusURL = "https://api.genius.com/search?q=Humble&access_token="+accessToken;
+        var geniusURL = "https://api.genius.com/search?q="+songName+"&access_token="+accessToken;
  
         $.ajax({
             url: geniusURL,
             method: "GET",
         }).then(function (response) {
-            var lyricsURL = response.response.hits[0];
+            var lyricsURL = response.response.hits[0].result.url;
             console.log(response)
+            console.log(lyricsURL)
             $.ajax({
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET",
