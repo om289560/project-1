@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var isClickingRecentSearch ;
     $(".carousel").carousel();
     var recentSearches= [];
     var recentSongsFromLocalStorage = localStorage.getItem("song");
@@ -14,25 +15,36 @@ $(document).ready(function () {
         for (var i = 0; i < recentSearches.length; i++) {
             var newButton = $("<button>");
             newButton.addClass("recentSong");
+            newButton.attr("data-name", recentSearches[i])
             newButton.text(recentSearches[i]);
             $("#recent").append(newButton);
         }
     }
 
+    function searchMusic(songName) {
 
-    $("#submit-button").on("click", function () {
-        var songName = $("#song-search")
-            .val()
-            .trim();
-        recentSearches.push(songName);
-        localStorage.setItem("song", JSON.stringify(recentSearches));
+        if(isClickingRecentSearch === false){
+            recentSearches.push(songName);
+            localStorage.setItem("song", JSON.stringify(recentSearches));
+        }
         youtubeQuery(songName);
         lyricsQuery(songName);
+    }
+
+    $("#recent").on("click", ".recentSong", function(event){
+        isClickingRecentSearch = true
+        console.log(event.target.getAttribute("data-name"));
+        var songName = event.target.getAttribute("data-name")
+        searchMusic(songName)
+    })
+
+    $("#submit-button").on("click", function() {
+
+        isClickingRecentSearch = false;
+        var songName = $("#song-search").val().trim();
+
+        searchMusic(songName);
         renderButton();
-        $(".recentSong").on("click", function(){
-            $("#song-search").val().trim() === $(".recentSong").val().trim();
-            console.log($("#song-search").val().trim())
-        })
     });
 
     function youtubeQuery(songName) {
