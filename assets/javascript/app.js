@@ -102,17 +102,16 @@ $(document).ready(function() {
                 method: "GET"
             }).then(function(response) {
                 // console.log( response.Similar.Results[0].Name)
-                var artistNamesArray = response.Similar.Results.map(function(
-                    artist
-                ) {
-                    console.log(artist.Name);
+                var suggestionsArray = [];
+                response.Similar.Results.map(function(artist) {
+                    suggestionsArray.push(artist.Name);
                     return artist.Name;
-                    
                 });
-                for (var j; j > artistNamesArray.length; i++) {
+                for (var j = 0; j > suggestionsArray.length; i++) {
                     var newButtonTwo = $("<button>");
+                    console.log(suggestionsArray[j]);
                     newButtonTwo.addClass("suggestions");
-                    newButtonTwo.text(artist.Name);
+                    newButtonTwo.text(suggestionsArray[j]);
                     $("#related-content").append(newButtonTwo);
                 }
             });
