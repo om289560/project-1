@@ -105,9 +105,16 @@ $(document).ready(function() {
                 var artistNamesArray = response.Similar.Results.map(function(
                     artist
                 ) {
+                    console.log(artist.Name);
                     return artist.Name;
+                    
                 });
-                $(".related-content");
+                for (var j; j > artistNamesArray.length; i++) {
+                    var newButtonTwo = $("<button>");
+                    newButtonTwo.addClass("suggestions");
+                    newButtonTwo.text(artist.Name);
+                    $("#related-content").append(newButtonTwo);
+                }
             });
         }
     }
