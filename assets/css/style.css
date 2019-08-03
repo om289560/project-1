@@ -3,9 +3,12 @@ body{
   padding: 0px;
   margin: 0px;
   color: #ffffff;
-  font: helvetic
+  font-family: 'Days One', sans-serif;
 }
 
+h2 {
+    margin:0;
+}
 #gradient
 {
  width: 100%;
