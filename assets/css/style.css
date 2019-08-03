@@ -5,6 +5,9 @@ body{
   color: #ffffff;
   font-family: 'Days One', sans-serif;
 }
+#title {
+    margin: 0px;
+}
 
 h2 {
     margin:0;
@@ -31,3 +34,16 @@ h2 {
     overflow: auto;
 }
 
+@media screen and  (max-width: 450px )  {
+    #content-container {
+        display: flex;
+        flex-flow: row wrap;
+
+    }
+    #youtube-content {
+        width: 100%;
+    }
+    #lyrics-content {
+        width: 100%;
+    }
+  }
