@@ -49,10 +49,22 @@ $(document).ready(function () {
             });
         });
     }
-
+    function tasteQuery(songName) {
+        var tasteDiveURL = "https://tastedive.com/api/similar?q=cage+the+elephant&type=band&k=341252-project1-GORKXH3A";
+        var accessToken = "341252-project1-GORKXH3A";
+        
+        $.ajax({
+            Url: tasteDiveURL,
+            method: "GET",
+            }).then(function(response) {
+                console.log(reponse)
+                $(".related-content")
+            });
+          };
 
    
 
 
 });
+
 
