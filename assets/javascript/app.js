@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $(".carousel").carousel();
-    var recentSearches;
+    var recentSearches= [];
     var recentSongsFromLocalStorage = localStorage.getItem("song");
 
     if (recentSongsFromLocalStorage) {
@@ -17,10 +17,10 @@ $(document).ready(function() {
             newButton.text(recentSearches[i]);
             $("#recent").append(newButton);
         }
-        //     JSON.parse(localStorage.getItem("song"));
     }
 
-    $("#submit-button").on("click", function() {
+
+    $("#submit-button").on("click", function () {
         var songName = $("#song-search")
             .val()
             .trim();
@@ -28,8 +28,11 @@ $(document).ready(function() {
         localStorage.setItem("song", JSON.stringify(recentSearches));
         youtubeQuery(songName);
         lyricsQuery(songName);
-        // tasteQuery(songName);//work in progress
         renderButton();
+        $(".recentSong").on("click", function(){
+            $("#song-search").val().trim() === $(".recentSong").val().trim();
+            console.log($("#song-search").val().trim())
+        })
     });
 
     function youtubeQuery(songName) {
@@ -40,14 +43,14 @@ $(document).ready(function() {
 
         $.ajax({
             url: "https://cors-anywhere.herokuapp.com/" + youTubeURL
-        }).then(function(response) {
+        }).then(function (response) {
             var videoID = response.items[0].id.videoId;
             $(".video-container").append(
                 "<iframe id='ytplayer' type='text/html' width='300' height='300' src='https://www.youtube.com/embed/" +
-                    videoID +
-                    "?autoplay=1&origin=http:" +
-                    videoID +
-                    "?version=3' frameborder='0'></iframe>"
+                videoID +
+                "?autoplay=1&origin=http:" +
+                videoID +
+                "?version=3' frameborder='0'></iframe>"
             );
         });
     }
@@ -66,7 +69,7 @@ $(document).ready(function() {
         $.ajax({
             url: geniusURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             $("#lyrics-content").empty();
             var lyricsURL = response.response.hits[0].result.url;
             var artist = response.response.hits[0].result.primary_artist.name;
@@ -75,7 +78,7 @@ $(document).ready(function() {
             $.ajax({
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET"
-            }).then(function(response) {
+            }).then(function (response) {
                 var songLyricsLinesList = $(response)
                     .find(".lyrics")
                     .find("p")
@@ -100,9 +103,9 @@ $(document).ready(function() {
             $.ajax({
                 url: tasteDiveURL,
                 method: "GET"
-            }).then(function(response) {
+            }).then(function (response) {
                 // console.log( response.Similar.Results[0].Name)
-                var artistNamesArray = response.Similar.Results.map(function(
+                var artistNamesArray = response.Similar.Results.map(function (
                     artist
                 ) {
                     return artist.Name;
@@ -111,7 +114,7 @@ $(document).ready(function() {
             });
         }
     }
-  
+
     renderButton();
 });
 
