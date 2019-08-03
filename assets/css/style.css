@@ -13,3 +13,21 @@ body{
  padding: 0px;
  margin: 0px;
 }
+<<<<<<< HEAD
+=======
+
+.search {
+    box-sizing: border-box;
+    margin: 20px;
+}
+#lyrics-content{
+    font-family: 'Questrial', sans-serif;
+    font-size: 20px;
+    height: 336.5px;
+    width: 41.5%;
+    border: 1px solid #ccc;
+    font: 16px/26px Georgia, Garamond, Serif;
+    overflow: auto;
+}
+
+>>>>>>> a81922b6608f8e4f72284fcc883da0aaf62f11db

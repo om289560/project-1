@@ -1,8 +1,9 @@
 $(document).ready(function () {
     $('.carousel').carousel();
-    $(".waves-effect").on("click", function () {
+    $("#submit-button").on("click", function () {
         var songName = $("#song-search").val().trim();
         youtubeQuery(songName);
+      
         lyricsQuery(songName);
         // tasteQuery(songName);//work in progress
         console.log(songName)
@@ -32,6 +33,7 @@ $(document).ready(function () {
             url: geniusURL,
             method: "GET",
         }).then(function (response) {
+            $("#lyrics-content").empty();
             var lyricsURL = response.response.hits[0].result.url;
             console.log(response)
             console.log(lyricsURL)
@@ -39,10 +41,11 @@ $(document).ready(function () {
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET",
             }).then(function(response) {
-                var yo = $(response).find(".lyrics").text();
-                console.log(yo);
+                var songLyrics = $(response).find(".lyrics").text();
+                console.log(songLyrics);
                 console.log(response)
-                $("#lyrics-content").append(yo);
+                
+                $("#lyrics-content").text(songLyrics);
             });
         });
     }
