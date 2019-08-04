@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
     <div id="gradient">
         <div class="center-align">
@@ -23,11 +24,26 @@
                     <input id="song-search" type="text" data-length="10">
                     <label for="song">Search for a song</label>
                 </div>
+                <br>
+                <br>
                 <div class="center-align">
-                    <a class="waves-effect waves-light btn" id="submit-button">Search</a>
+                    <!-- <a class="waves-effect waves-light btn" id="submit-button">Search</a> -->
+                    <div class="svg-wrapper" id="submit-button">
+                            <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                              <rect class="shape" height="60" width="320" />
+                            </svg>
+                             <div class="text">Search</div>
+                          </div>
+
                 </div>
-                <p>Recent Searches: </p>
-                <div id="recent"></div>
+                <br>
+                <br>
+                <div id="searches" class="container pulse">
+                    <div id="searches-content">
+                    <p>Recent Searches: </p>
+                    <div id="recent"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -35,15 +51,15 @@
         <br>
         <div class="row">
             <div class="container">
-                <div id= "content-container" class="row">
+                <div id="content-container" class="row">
                     <div class="col s6" id="youtube-content">
                         <div class="video-container">
                             <iframe width="853" height="480" src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0"
-                            frameborder="0" allowfullscreen></iframe>
+                                frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col s6" id="lyrics-content">
-                        
+
                     </div>
                 </div>
             </div>
@@ -52,11 +68,16 @@
             <div class="row">
                 <div class="col-12" id="related-content">
                     <div class="carousel">
-                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse" id="first-carousel" href="#one!"></div>
-                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse" id="second-carousel" href="#two!"></div>
-                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse" id="third-carousel" href="#three!"></div>
-                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse" id="fourth-carousel" href="#four!"></div>
-                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse" id="fifth-carousel" href="#five!"></div>
+                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse"
+                            id="first-carousel" href="#one!"></div>
+                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse"
+                            id="second-carousel" href="#two!"></div>
+                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse"
+                            id="third-carousel" href="#three!"></div>
+                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse"
+                            id="fourth-carousel" href="#four!"></div>
+                        <div class="carousel-item flow-text valign-wrapper center-align black white-text pulse"
+                            id="fifth-carousel" href="#five!"></div>
                     </div>
                 </div>
             </div>
@@ -65,5 +86,6 @@
         <script src="assets/javascript/gradient.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="assets/javascript/app.js"></script>
-    </body>
-    </html>
+</body>
+
+</html>
