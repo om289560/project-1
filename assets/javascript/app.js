@@ -94,14 +94,19 @@ $(document).ready(function() {
                     suggestionsArray.push(artist.Name);
                 
                 // console.log(suggestionsArray);
-                $("#suggestions-box").empty();
-                for (var j = 0; j < suggestionsArray.length; j++) {
-                    var newButtonTwo = $("<button>");
-                    console.log(suggestionsArray[j]);
-                    newButtonTwo.addClass("suggestions");
-                    newButtonTwo.text(suggestionsArray[j]);
-                }
-                $("#related-content").append(newButtonTwo);
+                
+                $("#first-carousel").text(suggestionsArray[0]);
+                $("#second-carousel").text(suggestionsArray[1]);
+                $("#third-carousel").text(suggestionsArray[2]);
+                $("#fourth-carousel").text(suggestionsArray[3]);
+                $("#fifth-carousel").text(suggestionsArray[4]);
+                // for (var j = 0; j < suggestionsArray.length; j++) {
+                //     var newButtonTwo = $("<button>");
+                //     console.log(suggestionsArray[j]);
+                //     newButtonTwo.addClass("suggestions");
+                //     newButtonTwo.text(suggestionsArray[j]);
+                // }
+                
                 });
             });
         }

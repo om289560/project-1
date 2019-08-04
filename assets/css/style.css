@@ -33,6 +33,10 @@ h2 {
     font: 16px/26px Georgia, Garamond, Serif;
     overflow: auto;
 }
+.carousel-item {
+    text-align: center;
+
+}
 
 @media screen and  (max-width: 450px )  {
     #content-container {
