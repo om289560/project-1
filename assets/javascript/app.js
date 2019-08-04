@@ -1,6 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    var isClickingRecentSearch ;
     $(".carousel").carousel();
-    var recentSearches;
+    var recentSearches= [];
     var recentSongsFromLocalStorage = localStorage.getItem("song");
 
     if (recentSongsFromLocalStorage) {
@@ -14,22 +15,36 @@ $(document).ready(function() {
         for (var i = 0; i < recentSearches.length; i++) {
             var newButton = $("<button>");
             newButton.addClass("recentSong");
+            newButton.attr("data-name", recentSearches[i])
             newButton.text(recentSearches[i]);
             $("#recent").append(newButton);
         }
-        //     JSON.parse(localStorage.getItem("song"));
     }
 
-    $("#submit-button").on("click", function() {
-        var songName = $("#song-search")
-            .val()
-            .trim();
-        recentSearches.push(songName);
-        localStorage.setItem("song", JSON.stringify(recentSearches));
+    function searchMusic(songName) {
+
+        if(isClickingRecentSearch === false){
+            recentSearches.push(songName);
+            localStorage.setItem("song", JSON.stringify(recentSearches));
+        }
         youtubeQuery(songName);
         lyricsQuery(songName);
-        
-        // tasteQuery(songName);//work in progress
+    }
+
+    $("#recent").on("click", ".recentSong", function(event){
+        isClickingRecentSearch = true
+        console.log(event.target.getAttribute("data-name"));
+        var songName = event.target.getAttribute("data-name")
+        searchMusic(songName)
+    })
+
+    $("#submit-button").on("click", function() {
+
+        isClickingRecentSearch = false;
+        var songName = $("#song-search").val().trim();
+
+        searchMusic(songName);
+
         renderButton();
     });
 
@@ -39,10 +54,12 @@ $(document).ready(function() {
 // AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y
         $.ajax({
             url: "https://cors-anywhere.herokuapp.com/" + youTubeURL
-        }).then(function(response) {
+        }).then(function (response) {
             var videoID = response.items[0].id.videoId;
             $(".video-container").append(
+
                 "<iframe id='ytplayer' type='text/html' width='300' height='300' src='https://www.youtube.com/embed/" + videoID + "?autoplay=1&origin=http:" + videoID + "?version=3' frameborder='0'></iframe>"
+
             );
         });
     }
@@ -56,7 +73,7 @@ $(document).ready(function() {
         $.ajax({
             url: geniusURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             $("#lyrics-content").empty();
             var lyricsURL = response.response.hits[0].result.url;
             var artist = response.response.hits[0].result.primary_artist.name;
@@ -65,7 +82,7 @@ $(document).ready(function() {
             $.ajax({
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET"
-            }).then(function(response) {
+            }).then(function (response) {
                 var songLyricsLinesList = $(response)
                     .find(".lyrics")
                     .find("p")
@@ -87,8 +104,9 @@ $(document).ready(function() {
             $.ajax({
                 url: tasteDiveURL,
                 method: "GET"
-            }).then(function(response) {
+            }).then(function (response) {
                 // console.log( response.Similar.Results[0].Name)
+
                 var suggestionsArray = [];
                 response.Similar.Results.map(function(artist) {
                     suggestionsArray.push(artist.Name);
@@ -106,13 +124,13 @@ $(document).ready(function() {
                 //     newButtonTwo.addClass("suggestions");
                 //     newButtonTwo.text(suggestionsArray[j]);
                 // }
-                
+
                 });
             });
         }
         
     }
-  
+
     renderButton();
 });
 
