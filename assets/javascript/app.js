@@ -44,9 +44,11 @@ $(document).ready(function () {
         var songName = $("#song-search").val().trim();
 
         searchMusic(songName);
-
         renderButton();
+        $("#song-search").val("")
     });
+
+
 
     function youtubeQuery(songName) {
         var youTubeURL =
