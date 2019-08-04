@@ -1,48 +1,124 @@
-body{
+body {
     background-color: #000000;
-  padding: 0px;
-  margin: 0px;
-  color: #ffffff;
-  font-family: 'Days One', sans-serif;
+    padding: 0px;
+    margin: 0px;
+    color: #ffffff;
+    font-family: 'Days One', sans-serif;
 }
+
 #title {
     margin: 0px;
 }
 
 h2 {
-    margin:0;
+    margin: 0;
 }
-#gradient
-{
- width: 100%;
- height: 100%;
- padding: 0px;
- margin: 0px;
+
+#gradient {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
 .search {
     box-sizing: border-box;
     margin: 20px;
+    color: #ffffff;
 }
-#lyrics-content{
-    font-family: 'Questrial', sans-serif;
+/*  */
+html, body {
+    background: #333;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .svg-wrapper {
+    height: 60px;
+      margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+  }
+  
+  .shape {
+    fill: transparent;
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 8px;
+    stroke: #19f6e8;
+  }
+  
+  .text {
+    color: #fff;
+    font-family: 'Days One', sans-serif;
+    font-size: 22px;
+    letter-spacing: 8px;
+    line-height: 32px;
+    position: relative;
+    top: -48px;
+  }
+  
+  @keyframes draw {
+    0% {
+      stroke-dasharray: 140 540;
+      stroke-dashoffset: -474;
+      stroke-width: 8px;
+    }
+    100% {
+      stroke-dasharray: 760;
+      stroke-dashoffset: 0;
+      stroke-width: 2px;
+    }
+  }
+  
+  .svg-wrapper:hover .shape {
+    -webkit-animation: 0.5s draw linear forwards;
+    animation: 0.5s draw linear forwards;
+  }
+
+/*  */
+#song-search {
+    color: white;
+}
+#searches {
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(1,1,1,1);
+}
+#searches-content {
+    padding-top: 20px; 
+    padding-right: 30px; 
+    padding-bottom: 25px;
+    padding-left: 30px;
+}
+#recent {
+    font-size: 100%;
+    font-family: inherit;
+    border: 0;
+    padding: 0;
+}
+
+#lyrics-content {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     height: 336.5px;
     width: 41.5%;
-    border: 1px solid #ccc;
     font: 16px/26px Georgia, Garamond, Serif;
     overflow: auto;
 }
+
 .carousel-item {
     text-align: center;
-
 }
 
-@media screen and  (max-width: 450px )  {
+@media screen and (max-width: 450px) {
     #content-container {
         display: flex;
         flex-flow: row wrap;
-
     }
     #youtube-content {
         width: 100%;
@@ -50,4 +126,4 @@ h2 {
     #lyrics-content {
         width: 100%;
     }
-  }
+}
