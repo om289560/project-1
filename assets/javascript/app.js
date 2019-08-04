@@ -28,26 +28,21 @@ $(document).ready(function() {
         localStorage.setItem("song", JSON.stringify(recentSearches));
         youtubeQuery(songName);
         lyricsQuery(songName);
+        
         // tasteQuery(songName);//work in progress
         renderButton();
     });
 
     function youtubeQuery(songName) {
         var youTubeURL =
-            "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" +
-            songName +
-            "&VideoEmbedded=true&key=AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y";
-
+            "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyDCr1e5nD_Tz9RErqA61M6TPv_lEKiTw4E";
+// AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y
         $.ajax({
             url: "https://cors-anywhere.herokuapp.com/" + youTubeURL
         }).then(function(response) {
             var videoID = response.items[0].id.videoId;
             $(".video-container").append(
-                "<iframe id='ytplayer' type='text/html' width='300' height='300' src='https://www.youtube.com/embed/" +
-                    videoID +
-                    "?autoplay=1&origin=http:" +
-                    videoID +
-                    "?version=3' frameborder='0'></iframe>"
+                "<iframe id='ytplayer' type='text/html' width='300' height='300' src='https://www.youtube.com/embed/" + videoID + "?autoplay=1&origin=http:" + videoID + "?version=3' frameborder='0'></iframe>"
             );
         });
     }
@@ -55,13 +50,8 @@ $(document).ready(function() {
     function lyricsQuery(songName) {
         // get object of "song" from genius
         // find url and put in lyricsURL var
-        var accessToken =
-            "aB5kqaAZECyzU--9LkDp_QGCygvr42-91fCx7GBJGezunSnjw-bas1K5yeHlhK0H";
-        var geniusURL =
-            "https://api.genius.com/search?q=" +
-            songName +
-            "&access_token=" +
-            accessToken;
+        var accessToken = "aB5kqaAZECyzU--9LkDp_QGCygvr42-91fCx7GBJGezunSnjw-bas1K5yeHlhK0H";
+        var geniusURL = "https://api.genius.com/search?q=" + songName + "&access_token=" + accessToken;
 
         $.ajax({
             url: geniusURL,
@@ -91,10 +81,7 @@ $(document).ready(function() {
         });
         function tasteQuery(artist) {
             var tasteDiveURL =
-                "https://cors-anywhere.herokuapp.com/" +
-                "https://tastedive.com/api/similar?q=" +
-                artist +
-                "&type=band&limit=5&k=341252-project1-GORKXH3A";
+                "https://cors-anywhere.herokuapp.com/" + "https://tastedive.com/api/similar?q=" + artist + "&type=band&limit=5&k=341252-project1-GORKXH3A";
             // + artistName +
 
             $.ajax({
@@ -102,14 +89,28 @@ $(document).ready(function() {
                 method: "GET"
             }).then(function(response) {
                 // console.log( response.Similar.Results[0].Name)
-                var artistNamesArray = response.Similar.Results.map(function(
-                    artist
-                ) {
-                    return artist.Name;
+                var suggestionsArray = [];
+                response.Similar.Results.map(function(artist) {
+                    suggestionsArray.push(artist.Name);
+                
+                // console.log(suggestionsArray);
+                
+                $("#first-carousel").text(suggestionsArray[0]);
+                $("#second-carousel").text(suggestionsArray[1]);
+                $("#third-carousel").text(suggestionsArray[2]);
+                $("#fourth-carousel").text(suggestionsArray[3]);
+                $("#fifth-carousel").text(suggestionsArray[4]);
+                // for (var j = 0; j < suggestionsArray.length; j++) {
+                //     var newButtonTwo = $("<button>");
+                //     console.log(suggestionsArray[j]);
+                //     newButtonTwo.addClass("suggestions");
+                //     newButtonTwo.text(suggestionsArray[j]);
+                // }
+                
                 });
-                $(".related-content");
             });
         }
+        
     }
   
     renderButton();
