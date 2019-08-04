@@ -11,6 +11,7 @@ $(document).ready(function() {
 
     function renderButton() {
         $("#recent").empty();
+        jQuery.unique(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
             var newButton = $("<button>");
             newButton.addClass("recentSong");
@@ -23,7 +24,7 @@ $(document).ready(function() {
     $("#submit-button").on("click", function() {
         var songName = $("#song-search")
             .val()
-            .trim();
+            .trim();   
         recentSearches.push(songName);
         localStorage.setItem("song", JSON.stringify(recentSearches));
         youtubeQuery(songName);
@@ -112,7 +113,7 @@ $(document).ready(function() {
         }
         
     }
-  
+    
     renderButton();
 });
 
