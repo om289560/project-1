@@ -15,6 +15,7 @@ $(document).ready(function () {
         for (var i = 0; i < recentSearches.length; i++) {
             var newButton = $("<button>");
             newButton.addClass("recentSong");
+            newButton.addClass("pulse");
             newButton.attr("data-name", recentSearches[i])
             newButton.text(recentSearches[i]);
             $("#recent").append(newButton);
