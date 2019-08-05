@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    var isClickingRecentSearch ;
+    var isClickingRecentSearch;
     $(".carousel").carousel();
-    var recentSearches= [];
+    var recentSearches = [];
     var recentSongsFromLocalStorage = localStorage.getItem("song");
 
     if (recentSongsFromLocalStorage) {
@@ -9,6 +9,7 @@ $(document).ready(function () {
     } else {
         recentSearches = [];
     }
+
 
     function renderButton() {
         $("#recent").empty();
@@ -18,14 +19,13 @@ $(document).ready(function () {
             newButton.addClass("recentSong");
             newButton.addClass("pulse");
             newButton.attr("data-name", recentSearches[i])
-            newButton.text(recentSearches[i]);
+            newButton.html(recentSearches[i])
             $("#recent").append(newButton);
         }
     }
 
     function searchMusic(songName) {
-
-        if(isClickingRecentSearch === false){
+        if (isClickingRecentSearch === false) {
             recentSearches.push(songName);
             localStorage.setItem("song", JSON.stringify(recentSearches));
         }
@@ -33,18 +33,16 @@ $(document).ready(function () {
         lyricsQuery(songName);
     }
 
-    $("#recent").on("click", ".recentSong", function(event){
+    $("#recent").on("click", ".recentSong", function (event) {
         isClickingRecentSearch = true
         console.log(event.target.getAttribute("data-name"));
         var songName = event.target.getAttribute("data-name")
         searchMusic(songName)
     })
 
-    $("#submit-button").on("click", function() {
-
+    $("#submit-button").on("click", function () {
         isClickingRecentSearch = false;
         var songName = $("#song-search").val().trim();
-
         searchMusic(songName);
         renderButton();
         $("#song-search").val("")
@@ -54,23 +52,22 @@ $(document).ready(function () {
 
     function youtubeQuery(songName) {
         var youTubeURL =
-            "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyDCr1e5nD_Tz9RErqA61M6TPv_lEKiTw4E";
-// AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y
+            "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyCmvB469uoUoyfG_1PjZ76qRlNh1N9-uMM";
+        // AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y
         $.ajax({
             url: "https://cors-anywhere.herokuapp.com/" + youTubeURL
         }).then(function (response) {
             var videoID = response.items[0].id.videoId;
-            $(".video-container").append(
+            $(".video-container").html(
 
                 "<iframe id='ytplayer' type='text/html' width='300' height='300' src='https://www.youtube.com/embed/" + videoID + "?autoplay=1&origin=http:" + videoID + "?version=3' frameborder='0'></iframe>"
 
             );
+
         });
     }
 
     function lyricsQuery(songName) {
-        // get object of "song" from genius
-        // find url and put in lyricsURL var
         var accessToken = "aB5kqaAZECyzU--9LkDp_QGCygvr42-91fCx7GBJGezunSnjw-bas1K5yeHlhK0H";
         var geniusURL = "https://api.genius.com/search?q=" + songName + "&access_token=" + accessToken;
 
@@ -82,7 +79,6 @@ $(document).ready(function () {
             var lyricsURL = response.response.hits[0].result.url;
             var artist = response.response.hits[0].result.primary_artist.name;
             tasteQuery(artist);
-            // console.log(lyricsURL)
             $.ajax({
                 url: "https://cors-anywhere.herokuapp.com/" + lyricsURL,
                 method: "GET"
@@ -103,36 +99,23 @@ $(document).ready(function () {
         function tasteQuery(artist) {
             var tasteDiveURL =
                 "https://cors-anywhere.herokuapp.com/" + "https://tastedive.com/api/similar?q=" + artist + "&type=band&limit=5&k=341252-project1-GORKXH3A";
-            // + artistName +
 
             $.ajax({
                 url: tasteDiveURL,
                 method: "GET"
             }).then(function (response) {
-                // console.log( response.Similar.Results[0].Name)
-
                 var suggestionsArray = [];
-                response.Similar.Results.map(function(artist) {
+                response.Similar.Results.map(function (artist) {
                     suggestionsArray.push(artist.Name);
-                
-                // console.log(suggestionsArray);
-                
-                $("#first-carousel").text(suggestionsArray[0]);
-                $("#second-carousel").text(suggestionsArray[1]);
-                $("#third-carousel").text(suggestionsArray[2]);
-                $("#fourth-carousel").text(suggestionsArray[3]);
-                $("#fifth-carousel").text(suggestionsArray[4]);
-                // for (var j = 0; j < suggestionsArray.length; j++) {
-                //     var newButtonTwo = $("<button>");
-                //     console.log(suggestionsArray[j]);
-                //     newButtonTwo.addClass("suggestions");
-                //     newButtonTwo.text(suggestionsArray[j]);
-                // }
-
+                    $("#first-carousel").text(suggestionsArray[0]);
+                    $("#second-carousel").text(suggestionsArray[1]);
+                    $("#third-carousel").text(suggestionsArray[2]);
+                    $("#fourth-carousel").text(suggestionsArray[3]);
+                    $("#fifth-carousel").text(suggestionsArray[4]);
                 });
             });
         }
-        
+
     }
     renderButton();
 });
