@@ -6,6 +6,11 @@ body {
     font-family: 'Days One', sans-serif;
 }
 
+/* html, body {
+    background: #333;
+    height: 100%;
+    text-align: center;
+  } */
 #title {
     margin: 0px;
 }
@@ -27,12 +32,6 @@ h2 {
     color: #ffffff;
 }
 /*  */
-html, body {
-    background: #333;
-    height: 100%;
-    overflow: hidden;
-    text-align: center;
-  }
   
   .svg-wrapper {
     height: 60px;
