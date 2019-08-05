@@ -53,7 +53,10 @@ $(document).ready(function () {
     function youtubeQuery(songName) {
         var youTubeURL =
             "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=vevo%20" + songName + "&VideoEmbedded=true&key=AIzaSyCmvB469uoUoyfG_1PjZ76qRlNh1N9-uMM";
-        // AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y
+
+// AIzaSyBrUzOmwgzmZPFQ6rfWBY8-SyUp1C9LZ8Y
+//AIzaSyDCr1e5nD_Tz9RErqA61M6TPv_lEKiTw4
+
         $.ajax({
             url: "https://cors-anywhere.herokuapp.com/" + youTubeURL
         }).then(function (response) {
