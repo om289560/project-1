@@ -12,6 +12,7 @@ $(document).ready(function () {
 
     function renderButton() {
         $("#recent").empty();
+        jQuery.unique(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
             var newButton = $("<button>");
             newButton.addClass("recentSong");
@@ -133,7 +134,6 @@ $(document).ready(function () {
         }
         
     }
-
     renderButton();
 });
 
