@@ -1,7 +1,7 @@
 # project-1 -- 
 
 # Description
-Pulling information about the song you're listening to while you're listening to it. Getting lyrics for a song you're listening to. Display upcoming events related to the artist playing. Display suggested music.
+Pulling information about the song you're listening to while you're listening to it. Getting lyrics for a song you're listening to. Display upcoming events related to the artist playing. Display suggested music. Here is the link to the website https://ausar1989.github.io/group-project-1/
 
 
 # Sketch
